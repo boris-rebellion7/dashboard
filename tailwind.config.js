@@ -1,16 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-const plugin = require("tailwindcss/plugin");
-const typography = require("@tailwindcss/typography");
 
 module.exports = {
-    plugins: [
-        plugin(function ({ addBase }) {
-            addBase({
-                html: { fontSize: "0.93vw" }
-            });
-        }),
-        typography
-    ],
+    content: ["./src/**/*.{js,ts,jsx,tsx}"], // ✅ MUST match your file locations
 
     safelist: [
         "sample-class",
@@ -24,17 +15,8 @@ module.exports = {
             lineHeight: {},
             colors: {
                 black: "#000000",
-                white: "#FFFBF6",
-                transparentWhite: "rgba(255, 255, 255, 0.44)",
-                green: "#A5F982",
-                paleGreen: "#C0F1A0",
-                lightGreen: "rgba(84, 252, 24, 0.51)",
-                oyster: "#E2DAD0",
-                deepTeal: "#35524C",
-                gray: "#8E8E8E",
-                lightGray: "#D9D9D9",
-                darkTeal: "#1F3530",
-                ivory: "#F5EEE6"
+                white: "#FFFFFF",
+                blue: "#2555E7",
             },
             fontFamily: {
                 helveticaMedium: ["HelveticaNeue-Medium"],

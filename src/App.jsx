@@ -1,20 +1,14 @@
-import PageHeader from './components/PageHeader'
+import Dashboard from "./components/dashboard/Dashboard";
+import Navigation from "./components/app/Navigation";
 
 function App() {
-
   return (
-    <>
-      <div>
-        <PageHeader
-          headline="Bag Ventures"
-          image={{
-            url: '/header.png',
-            alt: 'Bag Ventures'
-          }}
-        />
-      </div>
-    </>
-  )
+    <div className="app">
+      <Navigation>
+        <Dashboard />
+      </Navigation>
+    </div>
+  );
 }
 
-export default App
+export default App;
