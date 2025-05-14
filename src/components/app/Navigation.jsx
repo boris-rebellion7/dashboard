@@ -6,26 +6,50 @@ import styled from "styled-components";
 import NavItem from "./NavItem";
 
 const InnerIconWrapper = styled.div`
-  width: 40px;
-  height: 40px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  background-color: #f0f0f0;
+  width: 3rem;
+  height: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
-    width: 60%;
+    width: 45%;
     height: auto;
   }
 
   &.active {
-    background-color: #2555E7;
+    background-color: #2555e7;
+    border-radius: 13px;
+  }
 
-    img {
-      filter: invert(1) brightness(100) saturate(100%);
-    }
+  /* Used this as a shorter way of adding the lines this would be different in a real project */
+  &:nth-child(3) {
+    border-bottom: 1px solid #e0e6eb;
+    padding-bottom: 1rem;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid #e0e6eb;
+    padding-bottom: 1rem;
+  }
+`;
+
+const Hamburger = styled.div`
+  width: 3rem;
+  height: 3rem;
+
+  .line {
+    width: 40%;
+    height: 1px;
+    margin: 2px auto;
+  }
+`;
+
+const NavGroup = styled.div`
+  &.active {
+    border-bottom: 1px solid #E0E6EB;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -38,10 +62,12 @@ const dashboardLinks = {
     {
       text: "Products",
       icon: "/icons/products.svg",
+      active: true,
     },
     {
       text: "Users",
       icon: "/icons/users.svg",
+      chevron: true
     },
     {
       text: "Settings",
@@ -50,7 +76,7 @@ const dashboardLinks = {
   ],
   Pages: [
     {
-      text: "Resolution",
+      text: "Resolution hub",
       icon: "/icons/resolution.svg",
     },
     {
@@ -58,7 +84,7 @@ const dashboardLinks = {
       icon: "/icons/businesses.svg",
     },
     {
-      text: "Aborted",
+      text: "Aborted Project",
       icon: "/icons/aborted.svg",
     },
   ],
@@ -66,59 +92,70 @@ const dashboardLinks = {
 
 const Navigation = ({ children }) => (
   <nav>
-    <div className="nav-wrapper flex p-4">
-      <div className="">
-        <div className="flex flex-col justify-between w-6 h-5 mb-10">
-          <span className="block h-0.5 bg-black"></span>
-          <span className="block h-0.5 bg-black"></span>
-          <span className="block h-0.5 bg-black"></span>
-        </div>
+    <div className="nav-wrapper flex fixed h-screen w-full">
+      {/* LEFT SECTION */}
+      <div className="bg-lightGray px-4 pt-3">
+        <Hamburger className="flex flex-col justify-center mb-5">
+          <span className="line block bg-black"></span>
+          <span className="line block bg-black"></span>
+          <span className="line block bg-black"></span>
+        </Hamburger>
 
         <div className="icon-wrapper">
-          {Array.from({ length: 7 }).map((_, idx) => (
-            <InnerIconWrapper key={idx} className={idx === 0 ? "active" : ""}>
-              <img src={`/icons/icon-${idx + 1}.svg`} alt={`icon${idx + 1}`} />
+          {Array.from({ length: 8 }).map((_, idx) => (
+            <InnerIconWrapper
+              key={idx}
+              className={`${idx === 0 ? "active" : ""} mb-3`}
+            >
+              <img src={`/icons/icon-${idx}.svg`} alt={`icon${idx + 1}`} />
             </InnerIconWrapper>
           ))}
         </div>
       </div>
+      {/* END :: LEFT SECTION */}
 
-      <div className="inner-wrapper grow pr-10">
-        <div className="top-section flex justify-between items-center">
-          <div>
-            <div className="logo flex">
+      <div className="inner-wrapper grow pr-4 flex flex-col">
+        {/* TOP SECTION */}
+        <div className="top-section flex justify-between items-center pt-3 px-8 mb-3">
+          <div className="flex">
+            <div className="logo flex mr-18">
               <img src="/logo.svg" alt="Logo" />
-              <span className="font-bold">ProductName</span>
             </div>
-            search
+
+            <img src="/icons/magnifying.svg" alt="Search" />
           </div>
 
-          <div>
+          <div className="pr-4">
             <div className="user-info flex items-center">
-              <img src="/icons/bell.svg" alt="bell" />
+              <img className="mr-4" src="/icons/bell.svg" alt="bell" />
               <img src="/user-image.png" alt="User Avatar" />
             </div>
           </div>
         </div>
+        {/* END :: TOP SECTION */}
 
-        <div className="bottom-section flex">
-          <div className="left-nav">
+        {/* BOTTOM SECTION */}
+        <div className="bottom-section flex grow px-4">
+          <div className="left-nav pt-4 mr-8">
             <div className="nav-items">
-              {Object.entries(dashboardLinks).map(([groupName, links]) => (
-                <div key={groupName} className="nav-group">
-                  <div className="nav-group-title">{groupName}</div>
+              {Object.entries(dashboardLinks).map(([groupName, links], index) => (
+                <NavGroup key={groupName} className={`${index === 0 ? "active" : ""} nav-group`}>
+                  <div className={`nav-group-title text-12 text-gray font-bold px-4 mb-4`}>{groupName}</div>
 
-                  {links.map(({ text, icon }) => (
+                  {links.map(({ text, icon, chevron, active }) => (
                     <div key={text} className="nav-item">
-                      <NavItem icon={icon} text={text} />
+                      <NavItem icon={icon} text={text} chevron={chevron} active={active} />
                     </div>
                   ))}
-                </div>
+                </NavGroup>
               ))}
             </div>
           </div>
+          {/* END :: BOTTOM SECTION */}
 
-          <div className="nav-content">{children}</div>
+          {/* SLOT */}
+          <div className="nav-content bg-lightGray rounded-2xl grow">{children}</div>
+          {/* END :: SLOT */}
         </div>
       </div>
     </div>
