@@ -10,6 +10,13 @@
 }
 
 @font-face {
+  font-family: 'Lexend-Bold';
+  src: url('/fonts/Lexend-Bold.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Manrope';
   src: url('/fonts/Manrope-Regular.woff2') format('woff2');
   font-weight: 400;
@@ -22,13 +29,18 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #000000;
+  color: #29343D;
   background-color: #fff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  ::selection {
+    background: theme('colors.blue');
+    color: theme('colors.white'); 
+  }
 }
 
 a {
