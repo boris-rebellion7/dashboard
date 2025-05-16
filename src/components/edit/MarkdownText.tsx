@@ -1,4 +1,4 @@
-// RichTextEditor.tsx
+// MarkdownText.tsx
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Underline from '@tiptap/extension-underline'
@@ -6,7 +6,7 @@ import Link from '@tiptap/extension-link'
 import Heading from '@tiptap/extension-heading'
 import TextAlign from '@tiptap/extension-text-align'
 
-export default function RichTextEditor() {
+export default function MarkdownText() {
   const editor = useEditor({
     extensions: [
       StarterKit,

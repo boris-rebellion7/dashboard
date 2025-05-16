@@ -8,6 +8,7 @@ interface ButtonProps {
   theme?: ButtonTheme;
   active?: boolean;
   chevron?: boolean;
+  smallIcon?: boolean;
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -31,16 +32,16 @@ const themeColors = {
         radius: "0.5rem"
     },
     purple: {
-        bg: "#6B46C1",
+        bg: "#635BFF",
         text: "#FFFFFF",
-        padding: ".5rem 1rem",
-        radius: "0.75rem"
+        padding: ".3rem .5rem",
+        radius: "0.4rem"
     },
     red: {
-        bg: "#E53E3E",
-        text: "#FFFFFF",
-        padding: ".5rem 1rem",
-        radius: "0.75rem"
+        bg: "#FFE5ED",
+        text: "#FF6692",
+        padding: ".3rem .5rem",
+        radius: "0.4rem"
     }
 };
 
@@ -68,10 +69,10 @@ const ItemLink = styled.div<{ $theme: ButtonTheme; $active?: boolean }>`
     }
 `;
 
-const IconImage = styled.img`
+const IconImage = styled.img<{ $smallIcon?: boolean }>`
     margin-right: 0.25rem;
-    width: 20px;
-    height: 20px;
+    width: ${props => props.$smallIcon ? '10px' : '20px'};
+    height: ${props => props.$smallIcon ? '10px' : '20px'};
 `;
 
 const TextSpan = styled.span`
@@ -91,13 +92,14 @@ const Button = ({
     theme = "white",
     active = false,
     chevron = false,
+    smallIcon = false,
     onClick
 }: ButtonProps) => (
     <ItemLink
         onClick={onClick}
         $theme={theme}
         $active={active}>
-        {icon && <IconImage src={icon} alt={text} />}
+        {icon && <IconImage src={icon} alt={text} $smallIcon={smallIcon} />}
         <TextSpan>{text}</TextSpan>
         {chevron && <ChevronIcon src="/icons/chevron.svg" alt="Chevron" />}
     </ItemLink>

@@ -1,0 +1,16 @@
+/* FORM STYLES */
+input,
+textArea {
+    @apply text-14 bg-white py-3 px-4 w-full rounded;
+
+    border: 1px solid theme("colors.softGray")
+}
+
+label {
+    @apply text-14;
+}
+
+select {
+    @apply text-14 bg-white py-3 px-4 w-full rounded border border-solid border-softGray;
+}
+/* EDN :: FORM STYLES */

@@ -1,5 +1,6 @@
 import React from "react";
 import { getLenis } from "../helper/Lenis";
+// @todo color of the prev and next butons when on first and last tab
 
 interface PaginationProps {
   page: number;
@@ -34,7 +35,8 @@ const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setPage, se
   return (
     <div className="flex justify-end items-center my-4 px-7 grow">
       <div className="text-12 mr-4 flex items-center gap-2">
-        Items per page:{" "}
+        <span className="whitespace-nowrap">Items per page:</span>
+
         <select
           value={limit}
           onChange={(e) => handleLimitChange(Number(e.target.value))}

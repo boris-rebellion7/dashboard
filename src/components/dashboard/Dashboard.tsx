@@ -26,10 +26,14 @@ interface ProductsResponse {
 
 // Fetch function with typed response
 const fetchProducts = async ({ queryKey }) => {
-  const [, { page, limit }] = queryKey as [string, { page: number; limit: number }];
+  const [, { page, limit, sortBy, order }] = queryKey as [
+    string, 
+    { page: number; limit: number; sortBy?: string; order?: string }
+  ];
   const skip = (page - 1) * limit;
+  const sortParams = sortBy ? `&sortBy=${sortBy}&order=${order}` : '';
   const { data } = await axios.get(
-    `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+    `https://dummyjson.com/products?limit=${limit}&skip=${skip}${sortParams}`
   );
   return data;
 };
@@ -37,18 +41,25 @@ const fetchProducts = async ({ queryKey }) => {
 const ProductList = () => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(10);
+  const [currentSort, setCurrentSort] = useState({ field: '', order: 'asc' });
 
   const { data, isLoading, isError } = useQuery<ProductsResponse>({
-    queryKey: ["products", { page, limit }],
+    queryKey: ["products", { 
+      page, 
+      limit, 
+      sortBy: currentSort.field, 
+      order: currentSort.order 
+    }],
     queryFn: fetchProducts,
     placeholderData: keepPreviousData,
   });
 
-  // Add this line to help TypeScript:
-  const productsData = data as ProductsResponse;
+  const handleSort = (field: string, order: string) => {
+    setCurrentSort({ field, order });
+  };
 
   if (isLoading) return <p>Loading...</p>;
-  if (isError || !productsData) return <p>Error loading products</p>;
+  if (isError || !data) return <p>Error loading products</p>;
 
   return (
     <div className="dashboard grow flex flex-col p-8">
@@ -59,10 +70,13 @@ const ProductList = () => {
 
       <div className="bg-white rounded-b-2xl grow flex flex-col">
         <table className="min-w-full table-fixed border-collapse">
-          <DashboardHeader />
+          <DashboardHeader 
+            onSort={handleSort}
+            currentSort={currentSort}
+          />
 
           <tbody>
-            {productsData.products.map((product) => (
+            {data?.products.map((product) => (
               <DashboardItem
                 key={product.id}
                 id={product.id}
@@ -80,7 +94,7 @@ const ProductList = () => {
           <Pagination
             page={page}
             limit={limit}
-            total={productsData.total}
+            total={data.total}
             setPage={setPage}
             setLimit={setLimit}
           />

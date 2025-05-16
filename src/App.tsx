@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SmoothScroll from "./components/helper/SmoothScroll";
 import Dashboard from "./components/dashboard/Dashboard";
 import Detail from "./components/detail/Detail";
-import Edit from "./components/edit/Edit";
+import ProductEditor from "./components/edit/ProductEditor";
 import Navigation from "./components/app/Navigation";
+import "./App.css"
 
 const App: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>;
@@ -20,7 +21,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/detail" element={<Detail />} />
-          <Route path="/edit" element={<Edit />} />
+          <Route path="/edit" element={<ProductEditor />} />
         </Routes>
       </div>
     </Navigation>
