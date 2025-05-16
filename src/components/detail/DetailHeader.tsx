@@ -101,7 +101,7 @@ const DetailHeader = ({
 
                     <div className="flex items-center mb-6 text-14">
                         <div className="flex mr-2">
-                            <Rating 
+                            <Rating
                                 rating={rating} />
                         </div>
                         <span className="text-black">({rating} with {reviews.length} reviews)</span>
@@ -131,16 +131,11 @@ const DetailHeader = ({
                                 >
                                     -
                                 </button>
-                                <input
-                                    type="text"
-                                    className="bg-white border-t border-b border-gray/40 text-center w-10 px-2 py-1"
-                                    value={quantity}
-                                    readOnly
-                                />
-                                <button
-                                    onClick={increaseQuantity}
-                                    className="border border-gray/40 rounded-r-md px-4 py-1 text-black hover:bg-blue hover:text-white transition"
-                                >
+                                <p className="bg-white border-t border-b border-gray/40 text-center !w-10 !px-2 !py-1">
+                                    {quantity}</p>                                
+                                    <button
+                                        onClick={increaseQuantity}
+                                        className="border border-gray/40 rounded-r-md px-4 py-1 text-black hover:bg-blue hover:text-white transition">
                                     +
                                 </button>
                             </div>
