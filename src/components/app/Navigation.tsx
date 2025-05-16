@@ -107,10 +107,10 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
   const navigate = useNavigate();
 
   return (
-    <nav>
-      <div className="nav-wrapper flex fixed h-screen w-full">
+    <nav className="h-screen w-full">
+      <div className="nav-wrapper flex fixed h-full w-full">
         {/* LEFT SECTION */}
-        <div className="bg-lightGray px-4 pt-3">
+        <div className="bg-lightGray px-4 pt-3 h-full">
           <Hamburger className="flex flex-col justify-center mb-5">
             <span className="line block bg-black"></span>
             <span className="line block bg-black"></span>
@@ -130,7 +130,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
         </div>
         {/* END :: LEFT SECTION */}
 
-        <div className="inner-wrapper grow pr-4 flex flex-col">
+        <div className="inner-wrapper grow pr-4 flex flex-col h-full">
           {/* TOP SECTION */}
           <div className="top-section flex justify-between items-center pt-3 px-8 mb-3">
             <div className="flex">
@@ -155,7 +155,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
           {/* END :: TOP SECTION */}
 
           {/* BOTTOM SECTION */}
-          <div className="bottom-section flex grow px-4">
+          <div className="bottom-section flex grow px-4 h-full overflow-hidden">
             <div className="left-nav pt-5 mr-10">
               <div className="nav-items">
                 {Object.entries(dashboardLinks).map(([groupName, links], index) => (
@@ -179,7 +179,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
             {/* END :: BOTTOM SECTION */}
 
             {/* SLOT */}
-            <div className="nav-content bg-lightGray rounded-2xl grow flex flex-col">{children}</div>
+            <div className="nav-content bg-lightGray rounded-2xl w-full">{children}</div>
             {/* END :: SLOT */}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { getLenis } from "../helper/Lenis";
 
 interface PaginationProps {
   page: number;
@@ -12,7 +13,23 @@ const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setPage, se
   const totalPages = Math.ceil(total / limit);
   const start = limit * (page - 1) + 1;
   const end = Math.min(limit * page, total);
-  //   @todo fix the color change on the buttons when the page is on beginning or end
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: false });
+    }
+  };
+
+  const handleLimitChange = (newLimit: number) => {
+    setLimit(newLimit);
+    setPage(1);
+    const lenis = getLenis();
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: false });
+    }
+  };
 
   return (
     <div className="flex justify-end items-center my-4 px-7 grow">
@@ -20,10 +37,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setPage, se
         Items per page:{" "}
         <select
           value={limit}
-          onChange={(e) => {
-            setLimit(Number(e.target.value));
-            setPage(1);
-          }}
+          onChange={(e) => handleLimitChange(Number(e.target.value))}
           className="border border-gray/25 rounded px-3 py-2 text-12 bg-white"
         >
           {[5, 10, 25].map((size) => (
@@ -39,13 +53,17 @@ const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setPage, se
       </div>
 
       <div className="flex gap-2">
-        <button className="mx-2" onClick={() => setPage(1)} disabled={page === 1}>
+        <button 
+          className="mx-2" 
+          onClick={() => handlePageChange(1)} 
+          disabled={page === 1}
+        >
           <img src="/icons/full-left.svg" alt="First Page" />
         </button>
 
         <button
           className="mx-2"
-          onClick={() => setPage((p) => Math.max(p - 1, 1))}
+          onClick={() => handlePageChange(Math.max(page - 1, 1))}
           disabled={page === 1}
         >
           <img src="/icons/left.svg" alt="Previous Page" />
@@ -53,7 +71,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setPage, se
 
         <button
           className="mx-2"
-          onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
+          onClick={() => handlePageChange(Math.min(page + 1, totalPages))}
           disabled={page === totalPages}
         >
           <img src="/icons/right.svg" alt="Next Page" />
@@ -61,7 +79,7 @@ const Pagination: React.FC<PaginationProps> = ({ page, limit, total, setPage, se
 
         <button
           className="mx-2"
-          onClick={() => setPage(totalPages)}
+          onClick={() => handlePageChange(totalPages)}
           disabled={page === totalPages}
         >
           <img src="/icons/full-right.svg" alt="Last Page" />
