@@ -156,7 +156,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
 
           {/* BOTTOM SECTION */}
           <div className="bottom-section flex grow px-4 h-full overflow-hidden">
-            <div className="left-nav pt-5 mr-10">
+            <div className="left-nav pt-5 pr-8 w-[15%]">
               <div className="nav-items">
                 {Object.entries(dashboardLinks).map(([groupName, links], index) => (
                   <NavGroup key={groupName} className={`${index === 0 ? "active" : ""} nav-group`}>
@@ -168,6 +168,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
                           icon={icon}
                           text={text}
                           chevron={chevron}
+                          theme={active ? "blue" : "white"}
                           active={active ?? false}
                         />
                       </div>
@@ -179,7 +180,7 @@ const Navigation: React.FC<NavigationProps> = ({ children }) => {
             {/* END :: BOTTOM SECTION */}
 
             {/* SLOT */}
-            <div className="nav-content bg-lightGray rounded-2xl w-full">{children}</div>
+            <div className="nav-content bg-lightGray rounded-2xl w-[85%]">{children}</div>
             {/* END :: SLOT */}
           </div>
         </div>

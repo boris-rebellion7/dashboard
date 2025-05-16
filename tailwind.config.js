@@ -11,18 +11,23 @@ export const theme = {
     extend: {
         lineHeight: {},
         colors: {
-            black: "#000000",
+            black: "#29343D",
             white: "#FFFFFF",
             blue: "#2555E7",
             lightBlue: "#DBF3FF",
             gray: "#98A4AE",
             blueGray: "#526B7A",
             lightGray: "#F4F7FB",
+            green: "#36C76C",
+            yellow: "#FFD648",
+            red: "#FF6692",
+            pink: "#FFE5ED"
         },
         fontFamily: {
             lexend: ["Lexend"],
             lexendBold: ["Lexend-Bold"],
             manrope: ["Manrope"],
+            manropeBold: ["Manrope-Bold"],
         },
         fontSize: {
             base: ["clamp(16px, 1rem, 22px)", { lineHeight: "1.2" }],

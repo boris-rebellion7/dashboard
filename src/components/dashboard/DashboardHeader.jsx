@@ -1,3 +1,5 @@
+// @todo fix the sorting for price
+
 const DashboardHeader = () => {
   return (
     <thead className="text-blueGray text-left">

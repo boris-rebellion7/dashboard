@@ -54,7 +54,7 @@ const ProductList = () => {
     <div className="dashboard grow flex flex-col p-8">
       <div className="flex justify-between items-center px-6 py-4 bg-lightBlue rounded-t-2xl">
         <h1 className="text-18 font-bold font-manrope">My Products</h1>
-        <Button text={"Add New Item"} active={true} />
+        <Button text={"Add New Item"} theme="blue" />
       </div>
 
       <div className="bg-white rounded-b-2xl grow flex flex-col">
